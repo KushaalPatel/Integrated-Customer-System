@@ -1,12 +1,8 @@
 public class VehicleInfo {
     // private vehicleinfo variables
-    private String model; // name of the vehicle model
-    private String year; // year in which the vehicle was manufactured
-    private String type; // type of vehicle, must select from: sedan, hatchback, luxury, sport, other
-    private String method; // how the vehical was acquired -- must select from: new certified pre-owned,
-                           // used, other
-    // construct class
+    private String model, year, type, method;
 
+    // construct class
     public VehicleInfo(String vehicle_model, String vehicle_year, String vehicle_type, String vehicle_method) {
         model = vehicle_model;
         year = vehicle_year;
