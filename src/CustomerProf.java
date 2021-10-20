@@ -1,23 +1,28 @@
+import java.util.HashSet;
+import java.util.Arrays;
+
 public class CustomerProf {
     // customerprof private variables
     private String adminID, firstName, lastName, address, phone;
     private Float income;
     private String status, use;
     private VehicleInfo VehInfo;
+    private HashSet<String> validStatus = new HashSet<>(Arrays.asList("active","inactive"));
+    private HashSet<String> validUse = new HashSet<>(Arrays.asList("business","personal","both"));
 
     // construct the class
     public CustomerProf(String administrativeId, String customerfirstName, String customerlastName,
-            String customerAddress, String customerPhone, Float customerIncome, String customerStatus,
+            String customerAddress, String customerPhone, float customerIncome, String customerStatus,
             String customerUse, VehicleInfo customerVehInfo) {
         adminID = administrativeId;
-        firstName = customerfirstName;
-        lastName = customerlastName;
-        address = customerAddress;
-        phone = customerPhone;
-        income = customerIncome;
-        status = customerStatus;
-        use = customerUse;
-        VehInfo = customerVehInfo;
+        updateFirstName(customerfirstName);
+        updateLastName(customerlastName);
+        updateAddress(customerAddress);
+        updatePhone(customerPhone);
+        updateIncome(customerIncome);
+        updateStatus(customerStatus);
+        updateUse(customerUse);
+        updateVehicleInfo(customerVehInfo);
     }
 
     // get adminid
@@ -62,7 +67,22 @@ public class CustomerProf {
 
     // update phone
     public void updatePhone(String customerPhone) {
-        phone = customerPhone;
+        String phoneArr[] = customerPhone.split("-");
+        if(phoneArr[0].length() == 3 && phoneArr[1].length() == 3 && phoneArr[2].length() == 4) {  // if each element of the inputted phone number has a valid length,
+            try{
+                // check if these each part are integers
+                Integer.parseInt(phoneArr[0]);
+                Integer.parseInt(phoneArr[1]);
+                Integer.parseInt(phoneArr[2]);
+                phone = customerPhone;               // if they all are integers, set phone to patientPhone (inputted value)
+            }catch (NumberFormatException e){
+                // if they all are not all integers, throw an IllegalArgumentException
+                throw new IllegalArgumentException("Phone number can only contain integers.");
+            }
+        }else{
+            // else, throw an IllegalArgumentException (there are not 3 string elements or they are not the correct length)
+            throw new IllegalArgumentException("Invalid phone number format, Enter valid format e.g. '111-111-1111'.");
+        }
     }
 
     // get income
@@ -82,12 +102,28 @@ public class CustomerProf {
 
     // update status
     public void updateStatus(String customerStatus) {
-        status = customerStatus;
+        if (validStatus.contains(customerStatus.toLowerCase())){
+            status = customerStatus;
+        }
+        else {
+            throw new IllegalArgumentException("Status must be either: business, personal, or both");
+        }
+        
     }
 
     // get use
     public String getUse() {
         return use;
+    }
+
+    // update use
+    public void updateUse(String customerUse){
+        if (validUse.contains(customerUse.toLowerCase())){
+            use = customerUse;
+        }
+        else {
+            throw new IllegalArgumentException("Status must be either: active or inactive");
+        }
     }
 
     // get vehicleinfo
@@ -100,4 +136,23 @@ public class CustomerProf {
         VehInfo = customerVehInfo;
     }
 
+    public static void main(String[] args){
+        VehicleInfo vehicleInfo = new VehicleInfo("GLK", "2010", "Luxury", "new");
+        CustomerProf customerProf1 = new CustomerProf("C1","Kushaal", "Patel", "2 mapleview road", "203-204-2045", 100000, "active", "Personal", vehicleInfo);
+        System.out.println(
+            "Admin ID: " + customerProf1.getAdminId() +"\n"+
+            "Customer's first name: " + customerProf1.getFirstName() +"\n"+
+            "Customer's last name: " + customerProf1.getLastName() +"\n"+
+            "Customer's address: " + customerProf1.getAddress() + "\n"+
+            "Customer's phone: " + customerProf1.getPhone() + "\n"+
+            "Customer's income: " + customerProf1.getIncome() + "\n"+
+            "Customer's status: " + customerProf1.getStatus() + "\n"+
+            "Customer's use: " + customerProf1.getUse() + "\n"+
+            "Customer's vehicle model: " +customerProf1.getVehicleInfo().getModel() + "\n"+
+            "Customer's vehicle year: " + customerProf1.getVehicleInfo().getYear() + "\n"+
+            "Customer's vehicle type: " + customerProf1.getVehicleInfo().getType() + "\n"+
+            "Customer's vehicle method: " + customerProf1.getVehicleInfo().getMethod() + "\n"
+        );
+    }
 }
+
