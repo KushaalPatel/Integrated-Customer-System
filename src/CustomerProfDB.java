@@ -95,7 +95,7 @@ public class CustomerProfDB {
         return arr[1]; //return what comes after colon + space (the values we want)
     }*/
 
-    public void initDatabase(String newFile) throws FileNotFoundException, NoSuchElementException {
+    public void initializeDatabase(String newFile) throws FileNotFoundException, NoSuchElementException {
         fileName = newFile;
         File myFile = new File(fileName);
         Scanner s = new Scanner(myFile);
@@ -128,7 +128,7 @@ public class CustomerProfDB {
         CustomerProfDB db = new CustomerProfDB("database/dbTest.txt");
         // MAKE SURE FILE IS EMPTY WHEN TESTING
         try{
-            db.initDatabase("database/dbTest.txt");
+            db.initializeDatabase("database/dbTest.txt");
         }
         catch (FileNotFoundException e){
             System.out.println("Error initializing database. File not found.");
