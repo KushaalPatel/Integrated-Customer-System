@@ -1,10 +1,13 @@
-
+import java.io.FileNotFoundException;
+import java.util.NoSuchElementException;
+import java.util.Scanner;
 /*
 The fourth class, CustomerProfInterface, is used to access and update the database of customer
 profiles for queries by administrative users.
  */
 public class CustomerProfInterface {
-
+    private String fileName;
+    private CustomerProfDB db;
     /*
      The constructor
     CustomerProfInterface accepts the name of the file that serves as the database for the user interface
@@ -22,7 +25,78 @@ public class CustomerProfInterface {
     menu of options to choose from, record that selection, and call the appropriate method.
      */
     public void getUserChoice() {
-
+        Scanner s = new Scanner(System.in);
+        int choice;
+        System.out
+                .println("Would you like to initialize the database? The default database will be set to " + fileName);
+        System.out.println("1. Yes\n0. No");
+        while (true) {
+            System.out.print("Your choice: ");
+            try {
+                choice = Integer.parseInt(s.nextLine());
+                if (choice == 0) {
+                    try {
+                        db.initializeDatabase(fileName);
+                        break;
+                    } catch (FileNotFoundException e) {
+                        System.out.println("ERROR: Unable to find " + fileName);
+                    }
+                } else if (choice == 1) {
+                    initDB();
+                    break;
+                } else {
+                    System.out.println("ERROR: Enter a valid choice.");
+                }
+            } catch (NumberFormatException e) {
+                System.out.println("ERROR: Enter a valid number.");
+            }
+        }
+        while (true) {
+            while (true) {
+                try {
+                    System.out.println(
+                            "--------------------------------------MAIN MENU-----------------------------------------");
+                    System.out.println("1. Enter a New Customer Profile");
+                    System.out.println("2. Delete a Customer Profile by Last Name and AdminID");
+                    System.out.println("3. Find and Display a Customer Profile by Last Name and AdminID");
+                    System.out.println("4. Make Modifications to Customer Profile");
+                    System.out.println("5. Display All Profiles");
+                    System.out.println("6. Write to Database"); /* Write to the Current DB in use */
+                    System.out.println("0. Exit Application");
+                    System.out.print("Selection: ");
+                    choice = Integer.parseInt(s.nextLine());
+                    break;
+                } catch (Exception e) {
+                    System.out.println("ERROR: Please enter a valid menu option.");
+                }
+            }
+            if (choice == 0) {
+                break;
+            }
+            switch (choice) {
+            case (1):
+                // createNewCustomerProf()
+                break;
+            case (2):
+                // deleteCustomerProf(CustomerProf.getLastName(), adminID);
+                break;
+            case (3):
+                // findCustomerProf(lastName, adminID);
+                break;
+            case (4):
+                // updateCustomerProf();
+                break;
+            case (5):
+                // displayAllCustomerProf(adminID);
+                break;
+            case (6):
+                // writeToDB();
+                break;
+            default:
+                System.out.println("ERROR: Please enter a valid menu option.");
+            }
+        }
+        s.close();
     }
 
     /*
@@ -85,6 +159,23 @@ public class CustomerProfInterface {
 
     }
 
+    public void initDB() {
+        Scanner sc = new Scanner(System.in);
+        while (true) {
+            System.out.print("Enter a file path to be used: ");
+            try {
+                db.initializeDatabase(sc.nextLine());
+                break;
+            } catch (FileNotFoundException e) {
+                System.out.println("Error initializing database. File not found.");
+            } catch (NoSuchElementException e) {
+                System.out.println("Error initializing database.");
+            }
+        }
+        System.out.println("DB initialization was successful.");
+        sc.close();
+    }
+
     /*
     Enter a New CustomerProf: All inputs required to create an instance of a customer profile as
     defined by the CustomerProf class is solicited from the user. The method
@@ -92,14 +183,13 @@ public class CustomerProfInterface {
     a menu to elicit the profile information and in turn invokes another method createVehicleInfo to
     obtain the information of the vehicle for the customer.
      */
-    public CustomerProf createNewCustomerProf() {
+    // public CustomerProf createNewCustomerProf() {}
+
+
+    // public VehicleInfo createNewVehicleInfo() {}
+
+    public static void main(String args[]) {
 
     }
-
-
-    public VehicleInfo createNewVehicleInfo() {
-
-    }
-
 
 }
