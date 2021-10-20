@@ -140,7 +140,10 @@ public class CustomerProfDB {
             System.out.println("Profile updated");
         }
 
+        CustomerProf customerProf2 = new CustomerProf("C2", "Karen", "Smith", "21 mapleview road", "202-204-2045",
+                100100, "active", "Personal", vehicleInfo1);
         db.insertNewProfile(customerProf1);
+        db.insertNewProfile(customerProf2);
         db.findFirstProfile();
 
         try {

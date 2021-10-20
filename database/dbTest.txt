@@ -2,10 +2,23 @@ Customer Profiles
 ------------------------------------------------------
 Administrative ID: C1
 Customer's first name: Kushaal
-Customer's last name: Patela
+Customer's last name: Patel
 Customer's address: 231 mapleview road
 Customer's phone number: 203-204-2045
 Customer's income: 100000.0
+Customer's status: active
+Customer's use: Personal
+Customer's vehicle model: GLK
+Customer's vehicle year: 2010
+Customer's vehicle type: luxury
+Customer's vehicle method: new
+------------------------------------------------------
+Administrative ID: C2
+Customer's first name: Karen
+Customer's last name: Smith
+Customer's address: 21 mapleview road
+Customer's phone number: 202-204-2045
+Customer's income: 100100.0
 Customer's status: active
 Customer's use: Personal
 Customer's vehicle model: GLK
