@@ -10,11 +10,22 @@ public class CustomerProfDB {
     private int numCustomer, currentCustomerIndex;
     private String fileName;
     private ArrayList<CustomerProf> customerList = new ArrayList<CustomerProf>();
+    private HashSet<String> validAdminIds = new HashSet<>(Arrays.asList("PA1", "PA2", "PA3"));    // contains the valid options for adminId
 
     public CustomerProfDB(String fName){
         fileName = fName;
         numCustomer = 0; // init to 0
         currentCustomerIndex = 0; // init to 0
+    }
+
+    /* Gets options for adminId HashSet<String> in constant lookup time, used by interface*/
+    public HashSet<String> getValidAdminIds(){
+        return validAdminIds;
+    }
+
+    /* Gets Customer list ArrayList<CustomerProf> */
+    public ArrayList<CustomerProf> getCustomerList(){
+        return customerList;
     }
 
     public void insertNewProfile(CustomerProf prof){
@@ -65,12 +76,12 @@ public class CustomerProfDB {
         return customerList.get(currentCustomerIndex);
     }
 
-    public void writeAllPatientProf(String newFileName) throws IOException{
+    public void writeAllCustomerProf(String newFileName) throws IOException{
         FileWriter myWriter = new FileWriter(newFileName, false);           // create FileWriter for the file with the file path newFileName, set append to false (we will be clearing the file and rewriting it each time method is called)
         myWriter.write("Customer Profiles\n");                                   // database file header
-        // loop through all the patients in the patientList
+        // loop through all the customers in the customerList
         for(CustomerProf customer: customerList){
-                // write patient attributes to file with separator between each different patient
+                // write customer attributes to file with separator between each different customer
                 myWriter.write( "------------------------------------------------------\n"+
                         "Administrative ID: " + customer.getAdminId()+"\n"+
                         "Customer's first name: "+ customer.getFirstName()+"\n"+
@@ -124,7 +135,7 @@ public class CustomerProfDB {
     
     public static void main(String[] args){
         VehicleInfo vehicleInfo1 = new VehicleInfo("GLK", "2010", "luxury", "new");
-        CustomerProf customerProf1 = new CustomerProf("C1","Kushaal", "Patel", "231 mapleview road", "203-204-2045", 100000, "active", "Personal", vehicleInfo1);
+        CustomerProf customerProf1 = new CustomerProf("PA1","Kushaal", "Patel", "231 mapleview road", "203-204-2045", 100000, "active", "Personal", vehicleInfo1);
         CustomerProfDB db = new CustomerProfDB("database/dbTest.txt");
         // MAKE SURE FILE IS EMPTY WHEN TESTING
         try{
@@ -140,14 +151,14 @@ public class CustomerProfDB {
             System.out.println("Profile updated");
         }
 
-        CustomerProf customerProf2 = new CustomerProf("C2", "Karen", "Smith", "21 mapleview road", "202-204-2045",
+        CustomerProf customerProf2 = new CustomerProf("PA2", "Karen", "Smith", "21 mapleview road", "202-204-2045",
                 100100, "active", "Personal", vehicleInfo1);
         db.insertNewProfile(customerProf1);
         db.insertNewProfile(customerProf2);
         db.findFirstProfile();
 
         try {
-            db.writeAllPatientProf("database/dbTest.txt");
+            db.writeAllCustomerProf("database/dbTest.txt");
         } catch(IOException e){
             System.out.println("Error writing to database.");
         }
