@@ -9,16 +9,20 @@ import java.io.FileWriter;
 public class CustomerProfDB {
     private int numCustomer, currentCustomerIndex;
     private String fileName;
-    private ArrayList<CustomerProf> customerList = new ArrayList<CustomerProf>();
+    private ArrayList<CustomerProf> customerList;
     private HashSet<String> validAdminIds = new HashSet<>(Arrays.asList("PA1", "PA2", "PA3"));    // contains the valid options for adminId
 
     public CustomerProfDB(String fName){
         fileName = fName;
         numCustomer = 0; // init to 0
         currentCustomerIndex = 0; // init to 0
+        customerList = new ArrayList<CustomerProf>();
     }
 
-    /* Gets options for adminId HashSet<String> in constant lookup time, used by interface*/
+    /*
+     * Gets options for adminId HashSet<String> in constan t lookup time, used by
+     * interface
+     */
     public HashSet<String> getValidAdminIds(){
         return validAdminIds;
     }
@@ -101,36 +105,38 @@ public class CustomerProfDB {
     }
 
     // helper to split strings for initDB
-    /*private String splitString(String line){
+    private String splitString(String line) {
         String[] arr = line.split(": "); //split by colon + space 
         return arr[1]; //return what comes after colon + space (the values we want)
-    }*/
+    }
 
     public void initializeDatabase(String newFile) throws FileNotFoundException, NoSuchElementException {
         fileName = newFile;
         File myFile = new File(fileName);
         Scanner s = new Scanner(myFile);
-    
-        while(s.hasNextLine()){
+        if (s.hasNextLine()) { // if the file is not empty then assume it has a header, go to next line
             s.nextLine();
+        }
+        while(s.hasNextLine()){
+            s.nextLine(); // skip ------------------
             CustomerProf newProf = new CustomerProf(
-            (s.nextLine()),                      // adminId
-            (s.nextLine()),                      // firstName
-            (s.nextLine()),                      // lastName
-            (s.nextLine()),                      // address
-            (s.nextLine()),                      // phone
-            Float.parseFloat((s.nextLine())),  // income
-            (s.nextLine()),                      // status
-            (s.nextLine()),                      // use
+                    splitString(s.nextLine()), // adminId
+                    splitString(s.nextLine()), // firstName
+                    splitString(s.nextLine()), // lastName
+                    splitString(s.nextLine()), // address
+                    splitString(s.nextLine()), // phone
+                    Float.parseFloat(splitString(s.nextLine())), // income
+                    splitString(s.nextLine()), // status
+                    splitString(s.nextLine()), // use
             new VehicleInfo(
-                (s.nextLine()), // model
-                (s.nextLine()), // year
-                (s.nextLine()), // type
-                (s.nextLine())) // method
+                            splitString(s.nextLine()), // model
+                            splitString(s.nextLine()), // year
+                            splitString(s.nextLine()), // type
+                            splitString(s.nextLine())) // method
             );
             insertNewProfile(newProf);
-            s.close();
         }
+        s.close();
     }
     
     public static void main(String[] args){

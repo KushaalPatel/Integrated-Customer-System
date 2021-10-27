@@ -20,6 +20,8 @@ public class CustomerProfInterface {
      */
     public CustomerProfInterface(String fName) {
         fileName = fName;
+        db = new CustomerProfDB(fName);
+
     }
 
     /*
@@ -28,32 +30,34 @@ public class CustomerProfInterface {
      */
     public void getUserChoice() {
         Scanner s = new Scanner(System.in);
+        boolean exit = false;
         int choice;
         System.out
                 .println("Would you like to initialize the database? The database will be set to " + fileName);
         System.out.println("1. Yes\n0. No");
-        // while (true) {
-        //     System.out.print("Your choice: ");
-        //     try {
-        //         choice = Integer.parseInt(s.nextLine());
-        //         if (choice == 0) {
-        //             try {
-        //                 db.initializeDatabase(fileName);
-        //                 break;
-        //             } catch (FileNotFoundException e) {
-        //                 System.out.println("ERROR: Unable to find " + fileName);
-        //             }
-        //         } else if (choice == 1) {
-        //             initDB();
-        //             break;
-        //         } else {
-        //             System.out.println("ERROR: Enter a valid choice.");
-        //         }
-        //     } catch (NumberFormatException e) {
-        //         System.out.println("ERROR: Enter a valid number.");
-        //     }
-        // }
         while (true) {
+            System.out.print("Your choice: ");
+            try {
+                choice = s.nextInt();
+                if (choice == 0) {
+                    try {
+                        db.initializeDatabase(fileName);
+                        System.out.println("DB initialization was successful."); // notify user database initialization
+                        break;
+                    } catch (FileNotFoundException e) {
+                        System.out.println("ERROR: Unable to find " + fileName);
+                    }
+                } else if (choice == 1) {
+                    initDB();
+                    break;
+                } else {
+                    System.out.println("ERROR: Enter a valid choice.");
+                }
+            } catch (NumberFormatException e) {
+                System.out.println("ERROR: Enter a valid number.");
+            }
+        }
+        while (!exit) {
             while (true) {
                 try {
                     System.out.println(
@@ -66,13 +70,14 @@ public class CustomerProfInterface {
                     System.out.println("6. Write to Database"); /* Write to the Current DB in use */
                     System.out.println("0. Exit Application");
                     System.out.print("Selection: ");
-                    choice = Integer.parseInt(s.nextLine());
+                    choice = s.nextInt();
                     break;
                 } catch (Exception e) {
                     System.out.println("ERROR: Please enter a valid menu option.");
                 }
             }
             if (choice == 0) {
+                exit = true;
                 break;
             }
             switch (choice) {
@@ -308,10 +313,11 @@ public class CustomerProfInterface {
 
     public void initDB() {
         Scanner sc = new Scanner(System.in);
+
         while (true) {
-            System.out.print("Enter a file path to be used: ");
+            // System.out.print("Enter a file path to be used: ");
             try {
-                db.initializeDatabase(sc.nextLine());
+                db.initializeDatabase(fileName);
                 break;
             } catch (FileNotFoundException e) {
                 System.out.println("Error initializing database. File not found.");
@@ -498,12 +504,13 @@ public class CustomerProfInterface {
         return false;       // no customers were found, return false
     }
     public static void main(String args[]) throws IOException, ClassNotFoundException{
-        System.out.println("Which file are you to edit?");
-        Scanner input = new Scanner(System.in);
-        String file = input.nextLine();
-        CustomerProfInterface application = new CustomerProfInterface(file);
+        // System.out.println("Which file are you to edit?");
+        // Scanner input = new Scanner(System.in);
+        // String file = input.nextLine();
+        String fName = "database/dbTest.txt";
+        CustomerProfInterface application = new CustomerProfInterface(fName);
         application.getUserChoice();
-        input.close();
+        // input.close();
         // java .\src\CustomerProfInterface.java .\database\dbTest.txt
     }
 
