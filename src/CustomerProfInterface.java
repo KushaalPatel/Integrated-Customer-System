@@ -32,27 +32,27 @@ public class CustomerProfInterface {
         System.out
                 .println("Would you like to initialize the database? The database will be set to " + fileName);
         System.out.println("1. Yes\n0. No");
-        while (true) {
-            System.out.print("Your choice: ");
-            try {
-                choice = Integer.parseInt(s.nextLine());
-                if (choice == 0) {
-                    try {
-                        db.initializeDatabase(fileName);
-                        break;
-                    } catch (FileNotFoundException e) {
-                        System.out.println("ERROR: Unable to find " + fileName);
-                    }
-                } else if (choice == 1) {
-                    initDB();
-                    break;
-                } else {
-                    System.out.println("ERROR: Enter a valid choice.");
-                }
-            } catch (NumberFormatException e) {
-                System.out.println("ERROR: Enter a valid number.");
-            }
-        }
+        // while (true) {
+        //     System.out.print("Your choice: ");
+        //     try {
+        //         choice = Integer.parseInt(s.nextLine());
+        //         if (choice == 0) {
+        //             try {
+        //                 db.initializeDatabase(fileName);
+        //                 break;
+        //             } catch (FileNotFoundException e) {
+        //                 System.out.println("ERROR: Unable to find " + fileName);
+        //             }
+        //         } else if (choice == 1) {
+        //             initDB();
+        //             break;
+        //         } else {
+        //             System.out.println("ERROR: Enter a valid choice.");
+        //         }
+        //     } catch (NumberFormatException e) {
+        //         System.out.println("ERROR: Enter a valid number.");
+        //     }
+        // }
         while (true) {
             while (true) {
                 try {
@@ -378,7 +378,8 @@ public class CustomerProfInterface {
             adminId = sc.nextLine();
             if (db.getValidAdminIds().contains(adminId)) {  // if their adminId is valid,
                 return adminId; // return the admin Id
-            }else{
+            }
+            else{
                 System.out.println("Unable to authenticate admin ID."); // else, print statement saying unable to authenticate adminId
             }
         }
@@ -496,9 +497,13 @@ public class CustomerProfInterface {
         }
         return false;       // no customers were found, return false
     }
-    public static void main(String args[]) {
-        CustomerProfInterface application = new CustomerProfInterface(args[0]);
+    public static void main(String args[]) throws IOException, ClassNotFoundException{
+        System.out.println("Which file are you to edit?");
+        Scanner input = new Scanner(System.in);
+        String file = input.nextLine();
+        CustomerProfInterface application = new CustomerProfInterface(file);
         application.getUserChoice();
+        input.close();
         // java .\src\CustomerProfInterface.java .\database\dbTest.txt
     }
 
