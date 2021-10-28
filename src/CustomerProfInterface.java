@@ -33,30 +33,21 @@ public class CustomerProfInterface {
         boolean exit = false;
         int choice;
         System.out
-                .println("Would you like to initialize the database? The database will be set to " + fileName);
-        System.out.println("1. Yes\n0. No");
-        while (true) {
-            System.out.print("Your choice: ");
-            try {
-                choice = s.nextInt();
-                if (choice == 0) {
-                    try {
-                        db.initializeDatabase(fileName);
-                        System.out.println("DB initialization was successful."); // notify user database initialization
-                        break;
-                    } catch (FileNotFoundException e) {
-                        System.out.println("ERROR: Unable to find " + fileName);
-                    }
-                } else if (choice == 1) {
-                    initDB();
-                    break;
-                } else {
-                    System.out.println("ERROR: Enter a valid choice.");
-                }
-            } catch (NumberFormatException e) {
-                System.out.println("ERROR: Enter a valid number.");
-            }
+                .println("Initializing the database... The database will be set to " + fileName);
+        try {
+            db.initializeDatabase(fileName);
         }
+        catch (FileNotFoundException e){
+            System.out.println("Error initializing database. File not found.");
+        }
+        catch(NoSuchElementException e){
+            System.out.println("Error initializing database.");
+        }
+        catch(IllegalArgumentException e){
+            System.out.println("Error initializing database. Improper DB format.");
+        }
+        System.out.println("DB initialization was successful."); // notify user database initialization
+                  
         while (!exit) {
             while (true) {
                 try {
@@ -70,17 +61,30 @@ public class CustomerProfInterface {
                     System.out.println("6. Write to Database"); /* Write to the Current DB in use */
                     System.out.println("0. Exit Application");
                     System.out.print("Selection: ");
-                    choice = s.nextInt();
+                    choice = Integer.parseInt(s.nextLine());
                     break;
                 } catch (Exception e) {
                     System.out.println("ERROR: Please enter a valid menu option.");
                 }
             }
-            if (choice == 0) {
-                exit = true;
-                break;
-            }
             switch (choice) {
+            case (0):
+                while(true){
+                        System.out.println("Are you sure you want to exit? Any customer profiles not written to the DB will be cleared.\n1. Yes\n0. No");
+                        System.out.print("Selection: ");
+                        try {
+                            choice = Integer.parseInt(s.nextLine());
+                        }catch(NumberFormatException e) {
+                            System.out.println("Please enter a valid option.");
+                        }
+                        if(choice == 1) {         // if user choice is 1, exit application
+                            exit = true;
+                            break;
+                        }else if(choice == 0){      // if user choice is 0, continue to main menu
+                            break;
+                        }
+                    }
+                    break;
             case (1):
                 createNewCustomerProf(getUserAdminId(s));
                 break;
@@ -338,8 +342,8 @@ public class CustomerProfInterface {
      */
     public CustomerProf createNewCustomerProf(String adminId) {
         Scanner sc = new Scanner(System.in);     // Scanner for getting user input
-        VehicleInfo newVehInfo = new VehicleInfo("", "000-000-0000", "other", "other"); //default
-        CustomerProf newCustomerProf = new CustomerProf(adminId, "", "", "", "000-000-0000", 0, "sport","new", newVehInfo); //default
+        VehicleInfo newVehInfo = new VehicleInfo("", "1111", "other", "other"); //default
+        CustomerProf newCustomerProf = new CustomerProf(adminId, "", "", "", "000-000-0000", 0, "active", "personal", newVehInfo); //default
         System.out.println("---------------------------CREATE A CUSTOMER PROFILE---------------------------");   // print header
         while(true) {
             try{

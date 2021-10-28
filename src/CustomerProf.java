@@ -106,7 +106,7 @@ public class CustomerProf {
             status = customerStatus;
         }
         else {
-            throw new IllegalArgumentException("Status must be either: business, personal, or both");
+            throw new IllegalArgumentException("Status must be either: active or inactive");
         }
         
     }
@@ -122,7 +122,7 @@ public class CustomerProf {
             use = customerUse;
         }
         else {
-            throw new IllegalArgumentException("Status must be either: active or inactive");
+            throw new IllegalArgumentException("Use must be either: business, personal, or both");
         }
     }
 
