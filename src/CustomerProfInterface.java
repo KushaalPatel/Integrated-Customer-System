@@ -49,8 +49,7 @@ public class CustomerProfInterface {
         System.out.println("DB initialization was successful."); // notify user database initialization
                   
         while (!exit) {
-            while (true) {
-                try {
+
                     System.out.println(
                             "--------------------------------------MAIN MENU-----------------------------------------");
                     System.out.println("1. Enter a New Customer Profile");
@@ -62,11 +61,9 @@ public class CustomerProfInterface {
                     System.out.println("0. Exit Application");
                     System.out.print("Selection: ");
                     choice = Integer.parseInt(s.nextLine());
-                    break;
-                } catch (Exception e) {
-                    System.out.println("ERROR: Please enter a valid menu option.");
-                }
-            }
+                    
+                
+            
             switch (choice) {
             case (0):
                 while(true){
@@ -76,6 +73,7 @@ public class CustomerProfInterface {
                             choice = Integer.parseInt(s.nextLine());
                         }catch(NumberFormatException e) {
                             System.out.println("Please enter a valid option.");
+                            break;
                         }
                         if(choice == 1) {         // if user choice is 1, exit application
                             exit = true;
@@ -105,6 +103,7 @@ public class CustomerProfInterface {
                 break;
             default:
                 System.out.println("ERROR: Please enter a valid menu option.");
+                break;
             }
         }
         s.close();
@@ -170,6 +169,7 @@ public class CustomerProfInterface {
         }catch (IllegalArgumentException e){
             System.out.println("The customer could not be found.");              // exception occurred, tell user the customer they want to display could not be found
         }
+        
         sc.close();
     }
 
@@ -316,7 +316,7 @@ public class CustomerProfInterface {
     }
 
     public void initDB() {
-        Scanner sc = new Scanner(System.in);
+        //Scanner sc = new Scanner(System.in);
 
         while (true) {
             // System.out.print("Enter a file path to be used: ");
@@ -330,7 +330,7 @@ public class CustomerProfInterface {
             }
         }
         System.out.println("DB initialization was successful.");
-        sc.close();
+        //sc.close();
     }
 
     /*
