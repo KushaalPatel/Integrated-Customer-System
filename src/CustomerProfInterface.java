@@ -32,36 +32,19 @@ public class CustomerProfInterface {
         Scanner s = new Scanner(System.in);
         boolean exit = false;
         int choice;
-        System.out
-                .println("Initializing the database... The database will be set to " + fileName);
-        try {
-            db.initializeDatabase(fileName);
-        }
-        catch (FileNotFoundException e){
-            System.out.println("Error initializing database. File not found.");
-        }
-        catch(NoSuchElementException e){
-            System.out.println("Error initializing database.");
-        }
-        catch(IllegalArgumentException e){
-            System.out.println("Error initializing database. Improper DB format.");
-        }
-        System.out.println("DB initialization was successful."); // notify user database initialization
-                  
+        initDB();
         while (!exit) {
 
-                    System.out.println(
-                            "--------------------------------------MAIN MENU-----------------------------------------");
-                    System.out.println("1. Enter a New Customer Profile");
-                    System.out.println("2. Delete a Customer Profile by Last Name and AdminID");
-                    System.out.println("3. Find and Display a Customer Profile by Last Name and AdminID");
-                    System.out.println("4. Make Modifications to Customer Profile");
-                    System.out.println("5. Display All Profiles");
-                    System.out.println("6. Write to Database"); /* Write to the Current DB in use */
-                    System.out.println("0. Exit Application");
-                    System.out.print("Selection: ");
-                    choice = Integer.parseInt(s.nextLine());
-                    
+            System.out.println("--------------------------------------MAIN MENU-----------------------------------------");
+            System.out.println("1. Enter a New Customer Profile");
+            System.out.println("2. Delete a Customer Profile by Last Name and AdminID");
+            System.out.println("3. Find and Display a Customer Profile by Last Name and AdminID");
+            System.out.println("4. Make Modifications to Customer Profile");
+            System.out.println("5. Display All Profiles");
+            System.out.println("6. Write to Database"); /* Write to the Current DB in use */
+            System.out.println("0. Exit Application");
+            System.out.print("Selection: ");
+            choice = Integer.parseInt(s.nextLine());   
                 
             
             switch (choice) {
@@ -121,13 +104,13 @@ public class CustomerProfInterface {
         System.out.println("---------------------------DELETE A CUSTOMER PROFILE---------------------------");
         if(db.getCustomerList().isEmpty()){
             System.out.println("There are no customers to update.");         // if customerList is empty, notify user that nothing to udpate
-            sc.close();
+            // sc.close();
             return;
         }
         if(!isThereCustomerProf(adminId)){
             System.out.println("There were no customers found for "+ adminId+".");
             // if there are no customers for that adminId, notify user and go back to main menu
-            sc.close();
+            // sc.close();
             return;
         }
         System.out.print("Enter the last name of the customer to delete: ");
@@ -137,7 +120,7 @@ public class CustomerProfInterface {
         }catch(IllegalArgumentException e){
             System.out.println("The customer to delete could not be found.");      // if exception, notify user the customer they want to delete could not be found
         }
-        sc.close();
+        // sc.close();
     }
 
     /*
@@ -155,12 +138,12 @@ public class CustomerProfInterface {
         System.out.println("---------------------------FIND AND DISPLAY A CUSTOMER PROFILE---------------------------");
         if(db.getCustomerList().isEmpty()){
             System.out.println("There are no customers to find.");         // if customerList is empty, notify user that no customers found and go back to main menu
-            sc.close();
+            // sc.close();
             return;
         }
         if(!isThereCustomerProf(adminId)){
             System.out.println("There were no customers found for "+ adminId+".");    // if there are no customers for that adminId, notify user and go back to main menu
-            sc.close();
+            // sc.close();
             return;
         }
         System.out.print("Enter the last name of the customer to view: ");
@@ -170,7 +153,7 @@ public class CustomerProfInterface {
             System.out.println("The customer could not be found.");              // exception occurred, tell user the customer they want to display could not be found
         }
         
-        sc.close();
+        // sc.close();
     }
 
     /*
@@ -189,13 +172,13 @@ public class CustomerProfInterface {
         System.out.println("---------------------------MODIFY AN EXISTING Customer PROFILE---------------------------");
         if(db.getCustomerList().isEmpty()){
             System.out.println("There are no customers to update.");         // if customerList is empty, notify user that nothing to udpate
-            sc.close();
+            // sc.close();
             return;
         }
         if(!isThereCustomerProf(adminId)){
             System.out.println("There were no customers found for "+ adminId+".");
             // if there are no customers for that adminId, notify user and go back to main menu
-            sc.close();
+            // sc.close();
             return;
         }
         // while there is an exception, prompt user to input a valid value
@@ -257,7 +240,7 @@ public class CustomerProfInterface {
                     System.out.println("Please enter a valid menu option.");     // prompt user to enter a valid menu option
             }
         }
-        sc.close();
+        // sc.close();
     }
 
 
@@ -317,19 +300,21 @@ public class CustomerProfInterface {
 
     public void initDB() {
         //Scanner sc = new Scanner(System.in);
-
+        System.out.println("Initializing the database... The database will be set to " + fileName);
         while (true) {
             // System.out.print("Enter a file path to be used: ");
             try {
                 db.initializeDatabase(fileName);
+                System.out.println("DB initialization was successful.");
                 break;
             } catch (FileNotFoundException e) {
                 System.out.println("Error initializing database. File not found.");
+                break;
             } catch (NoSuchElementException e) {
                 System.out.println("Error initializing database.");
+                break;
             }
         }
-        System.out.println("DB initialization was successful.");
         //sc.close();
     }
 
