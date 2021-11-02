@@ -67,21 +67,33 @@ public class CustomerProf {
 
     // update phone
     public void updatePhone(String customerPhone) {
-        String phoneArr[] = customerPhone.split("-");
-        if(phoneArr[0].length() == 3 && phoneArr[1].length() == 3 && phoneArr[2].length() == 4) {  // if each element of the inputted phone number has a valid length,
+        //String phoneArr[] = customerPhone.split("-");
+        // if(phoneArr[0].length() == 3 && phoneArr[1].length() == 3 && phoneArr[2].length() == 4) {  // if each element of the inputted phone number has a valid length,
+        //     try{
+        //         // check if these each part are integers
+        //         Integer.parseInt(phoneArr[0]);
+        //         Integer.parseInt(phoneArr[1]);
+        //         Integer.parseInt(phoneArr[2]);
+        //         phone = customerPhone;               // if they all are integers, set phone to patientPhone (inputted value)
+        //     }catch (NumberFormatException e){
+        //         // if they all are not all integers, throw an IllegalArgumentException
+        //         throw new IllegalArgumentException("Phone number can only contain integers.");
+        //     }
+        // }else{
+        //     // else, throw an IllegalArgumentException (there are not 3 string elements or they are not the correct length)
+        //     throw new IllegalArgumentException("Invalid phone number format, Enter valid format e.g. '111-111-1111'.");
+        // }
+        if(phone.length() == 10){
             try{
-                // check if these each part are integers
-                Integer.parseInt(phoneArr[0]);
-                Integer.parseInt(phoneArr[1]);
-                Integer.parseInt(phoneArr[2]);
-                phone = customerPhone;               // if they all are integers, set phone to patientPhone (inputted value)
-            }catch (NumberFormatException e){
+                phone = customerPhone;
+            }catch(NumberFormatException e){
                 // if they all are not all integers, throw an IllegalArgumentException
                 throw new IllegalArgumentException("Phone number can only contain integers.");
             }
-        }else{
+        }
+        else{
             // else, throw an IllegalArgumentException (there are not 3 string elements or they are not the correct length)
-            throw new IllegalArgumentException("Invalid phone number format, Enter valid format e.g. '111-111-1111'.");
+            throw new IllegalArgumentException("Invalid phone number format, Enter valid format e.g. '1111111111'.");
         }
     }
 

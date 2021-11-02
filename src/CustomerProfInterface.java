@@ -496,7 +496,7 @@ public class CustomerProfInterface {
         // System.out.println("Which file are you to edit?");
         // Scanner input = new Scanner(System.in);
         // String file = input.nextLine();
-        String fName = "database/dbTest.txt";
+        String fName = "database/testdatacopy.txt";
         CustomerProfInterface application = new CustomerProfInterface(fName);
         application.getUserChoice();
         // input.close();

@@ -82,11 +82,11 @@ public class CustomerProfDB {
 
     public void writeAllCustomerProf(String newFileName) throws IOException{
         FileWriter myWriter = new FileWriter(newFileName, false);           // create FileWriter for the file with the file path newFileName, set append to false (we will be clearing the file and rewriting it each time method is called)
-        myWriter.write("Customer Profiles\n");                                   // database file header
+        //myWriter.write("Customer Profiles\n");                                   // database file header
         // loop through all the customers in the customerList
         for(CustomerProf customer: customerList){
-                // write customer attributes to file with separator between each different customer
-                myWriter.write( "------------------------------------------------------\n"+
+                // write customer attributes to file                               //with separator between each different customer
+                myWriter.write( //"------------------------------------------------------\n"+
                         "Administrative ID: " + customer.getAdminId()+"\n"+
                         "Customer's first name: "+ customer.getFirstName()+"\n"+
                         "Customer's last name: "+ customer.getLastName()+"\n"+
@@ -105,34 +105,34 @@ public class CustomerProfDB {
     }
 
     // helper to split strings for initDB
-    private String splitString(String line) {
-        String[] arr = line.split(": "); //split by colon + space 
-        return arr[1]; //return what comes after colon + space (the values we want)
-    }
+    // private String splitString(String line) {
+    //     String[] arr = line.split(": "); //split by colon + space 
+    //     return arr[1]; //return what comes after colon + space (the values we want)
+    // }
 
     public void initializeDatabase(String newFile) throws FileNotFoundException, NoSuchElementException {
         fileName = newFile;
         File myFile = new File(fileName);
         Scanner s = new Scanner(myFile);
-        if (s.hasNextLine()) { // if the file is not empty then assume it has a header, go to next line
-            s.nextLine();
-        }
+        // if (s.hasNextLine()) { // if the file is not empty then assume it has a header, go to next line
+        //     s.nextLine();
+        // }
         while(s.hasNextLine()){
-            s.nextLine(); // skip ------------------
+            //s.nextLine(); // skip ------------------
             CustomerProf newProf = new CustomerProf(
-                    splitString(s.nextLine()), // adminId
-                    splitString(s.nextLine()), // firstName
-                    splitString(s.nextLine()), // lastName
-                    splitString(s.nextLine()), // address
-                    splitString(s.nextLine()), // phone
-                    Float.parseFloat(splitString(s.nextLine())), // income
-                    splitString(s.nextLine()), // status
-                    splitString(s.nextLine()), // use
+                    (s.nextLine()), // adminId
+                    (s.nextLine()), // firstName
+                    (s.nextLine()), // lastName
+                    (s.nextLine()), // address
+                    (s.nextLine()), // phone
+                    Float.parseFloat((s.nextLine())), // income
+                    (s.nextLine()), // status
+                    (s.nextLine()), // use
             new VehicleInfo(
-                            splitString(s.nextLine()), // model
-                            splitString(s.nextLine()), // year
-                            splitString(s.nextLine()), // type
-                            splitString(s.nextLine())) // method
+                            (s.nextLine()), // model
+                            (s.nextLine()), // year
+                            (s.nextLine()), // type
+                            (s.nextLine())) // method
             );
             insertNewProfile(newProf);
         }
