@@ -150,8 +150,8 @@ public class CustomerProf {
     }
 
     public static void main(String[] args){
-        VehicleInfo vehicleInfo = new VehicleInfo("GLK", "2010", "Luxury", "new");
-        CustomerProf customerProf1 = new CustomerProf("C1","Kushaal", "Patel", "2 mapleview road", "203-204-2045", 100000, "active", "Personal", vehicleInfo);
+        /*VehicleInfo vehicleInfo = new VehicleInfo("GLK", "2010", "Luxury", "new");
+        CustomerProf customerProf1 = new CustomerProf("C1","Kushaal", "Patel", "2 mapleview road", "2032042045", 100000, "active", "Personal", vehicleInfo);
         System.out.println(
             "Admin ID: " + customerProf1.getAdminId() +"\n"+
             "Customer's first name: " + customerProf1.getFirstName() +"\n"+
@@ -165,7 +165,7 @@ public class CustomerProf {
             "Customer's vehicle year: " + customerProf1.getVehicleInfo().getYear() + "\n"+
             "Customer's vehicle type: " + customerProf1.getVehicleInfo().getType() + "\n"+
             "Customer's vehicle method: " + customerProf1.getVehicleInfo().getMethod() + "\n"
-        );
+        );*/
     }
 }
 

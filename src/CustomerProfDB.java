@@ -152,8 +152,8 @@ public class CustomerProfDB {
     }
     
     public static void main(String[] args){
-        VehicleInfo vehicleInfo1 = new VehicleInfo("GLK", "2010", "luxury", "new");
-        CustomerProf customerProf1 = new CustomerProf("PA1","Kushaal", "Patel", "231 mapleview road", "203-204-2045", 100000, "active", "Personal", vehicleInfo1);
+        /*VehicleInfo vehicleInfo1 = new VehicleInfo("GLK", "2010", "luxury", "new");
+        CustomerProf customerProf1 = new CustomerProf("PA1","Kushaal", "Patel", "231 mapleview road", "2032042045", 100000, "active", "Personal", vehicleInfo1);
         CustomerProfDB db = new CustomerProfDB("database/dbTest.txt");
         // MAKE SURE FILE IS EMPTY WHEN TESTING
         try{
@@ -182,6 +182,6 @@ public class CustomerProfDB {
         }
         catch(NoSuchElementException e){
             System.out.println("Error writing to database.");
-        }
+        }*/
     }   
 }
