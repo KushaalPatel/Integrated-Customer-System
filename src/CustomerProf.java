@@ -83,7 +83,8 @@ public class CustomerProf {
         //     // else, throw an IllegalArgumentException (there are not 3 string elements or they are not the correct length)
         //     throw new IllegalArgumentException("Invalid phone number format, Enter valid format e.g. '111-111-1111'.");
         // }
-        if(phone.length() == 10){
+        // System.out.println(customerPhone);
+        if (customerPhone.length() == 10) {
             try{
                 phone = customerPhone;
             }catch(NumberFormatException e){
@@ -92,8 +93,8 @@ public class CustomerProf {
             }
         }
         else{
-            // else, throw an IllegalArgumentException (there are not 3 string elements or they are not the correct length)
-            throw new IllegalArgumentException("Invalid phone number format, Enter valid format e.g. '1111111111'.");
+            // else, throw an IllegalArgumentException (not the correct length)
+            throw new IllegalArgumentException("Invalid phone number format, Enter valid format e.g. '1112223333'.");
         }
     }
 

@@ -87,18 +87,30 @@ public class CustomerProfDB {
         for(CustomerProf customer: customerList){
                 // write customer attributes to file                               //with separator between each different customer
                 myWriter.write( //"------------------------------------------------------\n"+
-                        "Administrative ID: " + customer.getAdminId()+"\n"+
-                        "Customer's first name: "+ customer.getFirstName()+"\n"+
-                        "Customer's last name: "+ customer.getLastName()+"\n"+
-                        "Customer's address: "+ customer.getAddress()+"\n"+
-                        "Customer's phone number: "+ customer.getPhone()+"\n"+
-                        "Customer's income: " + customer.getIncome() + "\n"+
-                        "Customer's status: " + customer.getStatus() + "\n"+
-                        "Customer's use: " + customer.getUse() + "\n"+
-                        "Customer's vehicle model: " +customer.getVehicleInfo().getModel() + "\n"+
-                        "Customer's vehicle year: " + customer.getVehicleInfo().getYear() + "\n"+
-                        "Customer's vehicle type: " + customer.getVehicleInfo().getType() + "\n"+
-                        "Customer's vehicle method: " + customer.getVehicleInfo().getMethod() + "\n"
+                        // "Administrative ID: " +
+                        customer.getAdminId() + "\n" +
+                        // "Customer's first name: "+
+                                customer.getFirstName() + "\n" +
+                                // "Customer's last name: "+
+                                customer.getLastName() + "\n" +
+                                // "Customer's address: "+
+                                customer.getAddress() + "\n" +
+                                // "Customer's phone number: "+
+                                customer.getPhone() + "\n" +
+                                // "Customer's income: " +
+                                customer.getIncome() + "\n" +
+                                // "Customer's status: " +
+                                customer.getStatus() + "\n" +
+                                // "Customer's use: " +
+                                customer.getUse() + "\n" +
+                                // "Customer's vehicle model: " +
+                                customer.getVehicleInfo().getModel() + "\n" +
+                                // "Customer's vehicle year: " +
+                                customer.getVehicleInfo().getYear() + "\n" +
+                                // "Customer's vehicle type: " +
+                                customer.getVehicleInfo().getType() + "\n" +
+                                // "Customer's vehicle method: " +
+                                customer.getVehicleInfo().getMethod() + "\n"
                 );
         }
         myWriter.close();      // close FileWriter

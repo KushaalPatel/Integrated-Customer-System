@@ -328,7 +328,8 @@ public class CustomerProfInterface {
     public CustomerProf createNewCustomerProf(String adminId) {
         Scanner sc = new Scanner(System.in);     // Scanner for getting user input
         VehicleInfo newVehInfo = new VehicleInfo("", "1111", "other", "other"); //default
-        CustomerProf newCustomerProf = new CustomerProf(adminId, "", "", "", "000-000-0000", 0, "active", "personal", newVehInfo); //default
+        CustomerProf newCustomerProf = new CustomerProf(adminId, "", "", "", "0000000000", 0, "active", "personal",
+                newVehInfo); // default
         System.out.println("---------------------------CREATE A CUSTOMER PROFILE---------------------------");   // print header
         while(true) {
             try{
@@ -390,7 +391,7 @@ public class CustomerProfInterface {
         // while there is an exception, prompt user to input a valid value
         while(true) {
             try{
-                System.out.print("Enter phone number (e.g 203-123-4567): ");      // prompts user for  phone number
+                System.out.print("Enter phone number (e.g 2031234567): "); // prompts user for phone number
                 customerProf.updatePhone(sc.nextLine());                                         // sets phone
                 break;
             }catch (Exception e){
