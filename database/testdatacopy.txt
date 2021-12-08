@@ -3,70 +3,70 @@ Vlaho
 Munira
 32 Brown Blvd
 8002341623
-40000
+40000.0
 Active
 Personal
 Toyota
 2013
-Sedan
-Used
+sedan
+used
 PA2
 Velibor
 Marloes
 76 Little Street
 8002338912
-60000
+60000.0
 Inactive
 Business
 Nissan
 2013
-Sport
-Certified Pre-owned
+sport
+certified pre-owned
 PA2
 Zeus
 Payam
 10 Needmore Street
 8023341623
-100000
+100000.0
 Active
 Both
 Lexus
 2019
-Other
-Other
+other
+other
 PA1
 Floro
 Mirinda
 6517 Nearest Street
 8126125423
-80000
+80000.0
 Inactive
 Business
 Honda
 2017
-Hatchback
-Used
+hatchback
+used
 PA2
 Roosevelt
 Intan
 1001 Brown Ave
 8126742233
-60000
+60000.0
 Inactive
 Both
 Ford
 2018
-Sedan
-Other
+sedan
+other
 PA1
 Safa
 Javi
 6007 Research Ave
 8259841623
-400000
+400000.0
 Active
 Personal
 Ferrari
 2020
-Sport
-New
+sport
+new

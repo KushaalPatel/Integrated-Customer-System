@@ -42,6 +42,7 @@ public class CustomerProfDB {
             existingProf.updatePhone(prof.getPhone());
             existingProf.updateIncome(prof.getIncome());
             existingProf.updateStatus(prof.getStatus());
+            existingProf.updateUse(prof.getUse());
             existingProf.updateVehicleInfo(prof.getVehicleInfo());
         }
         catch(IllegalArgumentException e){
@@ -65,19 +66,25 @@ public class CustomerProfDB {
         throw new IllegalArgumentException("Couldn't find customer");
     }
     
-    public CustomerProf findFirstProfile() {
-        if(numCustomer <= 0) {
-            return null;
+    public CustomerProf findFirstProfile(String adminID) {
+        for(CustomerProf customer: customerList){
+            if(customer.getAdminId().equals(adminID)){                     // if adminid customer = inputted adminId...
+                currentCustomerIndex = customerList.indexOf(customer);     // set currentCustomerIndex to the index of the customer
+                return customer;                                           // return customer profile
+            }
         }
-        else{
-            CustomerProf customer = customerList.get(0); //1st customer in the list is at index 0
-            return customer;
-        }
+        throw new IllegalArgumentException("Could not find customer.");
     }
 
-    public CustomerProf findNextProfile() {
-        currentCustomerIndex++;
-        return customerList.get(currentCustomerIndex);
+    public CustomerProf findNextProfile(String adminID) {
+        currentCustomerIndex += 1;                                          
+        for(int i = currentCustomerIndex; i < customerList.size(); i++){
+            if(customerList.get(i).getAdminId().equals(adminID)){           // if adminid customer = inputted adminId...
+                currentCustomerIndex = i;                                   // set currentCustomerIndex to i
+                return customerList.get(currentCustomerIndex);              // return customer profile
+            }
+        }
+        throw new IllegalArgumentException("Could not find customer.");
     }
 
     public void writeAllCustomerProf(String newFileName) throws IOException{
@@ -121,6 +128,22 @@ public class CustomerProfDB {
     //     String[] arr = line.split(": "); //split by colon + space 
     //     return arr[1]; //return what comes after colon + space (the values we want)
     // }
+    public String getFile(){
+        return fileName;
+    }
+
+    public boolean moreProfLeft(String adminID){
+        int count = 0;      // count # profiles
+        for(CustomerProf customerProf: customerList){
+            if(customerProf.getAdminId().equals(adminID)){          // if adminid customer = inputted adminId...
+                count++;
+                if(count > 1){                                      // if count is greater than 1...
+                    return true;                                    // return true
+                }                                    
+            }
+        }
+        return false;
+    }
 
     public void initializeDatabase(String newFile) throws FileNotFoundException, NoSuchElementException {
         fileName = newFile;
