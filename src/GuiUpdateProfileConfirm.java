@@ -169,7 +169,7 @@ public class GuiUpdateProfileConfirm extends JFrame implements ActionListener{
                         errorLabel.setText(empty);
                         this.repaint();
                     } catch (Exception e){
-                        errorLabel.setText("Please enter a float as the customer's co-pay.");
+                        errorLabel.setText("Please enter a float as the customer's income.");
                         this.repaint();
                     }
                     break;
